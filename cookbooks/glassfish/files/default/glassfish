@@ -1,0 +1,33 @@
+#/bin/sh
+#
+# Startup GlassFishServer 3.1.2
+#
+# chkconfig: 2345 86 16
+# description: GlassFish is Java application Server.
+# processname: glassfish
+# pidfile: /var/run/glassfish.pid
+# config: /usr/local/glassfish3/config/asenv.conf
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+GF_HOME=/usr/local/glassfish3/glassfish/
+
+case "$1" in
+start)
+        echo "Starting application server" "glassfish"
+        $GF_HOME/bin/asadmin start-domain
+;;
+restart|reload|force-reload)
+        echo "Error: argument '$1' not supported. Use stop and wait and start." >&2
+        exit 3
+;;
+stop)
+        $GF_HOME/bin/asadmin stop-domain
+        echo "Stopping application server" "glassfish"
+;;
+*)
+
+;;
+esac
+
